@@ -11,17 +11,26 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "aphrodite": "^2.4.0",
+    "classnames": "^2.3.1",
+    "katex": "^0.13.11",
     "next": "9.5.5",
+    "next-auth": "^3.23.3",
+    "pg": "^8.6.0",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-preset-env": "^6.7.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "tailwindcss": "^1.9.5"
+    "tailwindcss": "^1.9.5",
+    "underscore": "^1.13.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
     "@typescript-eslint/eslint-plugin": "2.x",
     "@typescript-eslint/parser": "2.x",
     "babel-eslint": "10.x",
+    "cross-env": "^7.0.3",
     "eslint": "6.x",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-react-app": "^5.2.1",

@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "name": "Course",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "course_title": {
+      "type": "string",
+      "required": true
+    },
+    "cid": {
+      "type": "uid",
+      "required": false
+    },
+    "topics": {
+      "via": "course",
+      "collection": "topic"
+    },
+    "department": {
+      "via": "courses",
+      "model": "department"
+    },
+    "course_number": {
+      "type": "integer",
+      "required": true,
+      "max": 999
+    },
+    "credit_hours": {
+      "type": "integer",
+      "max": 8,
+      "default": 3
+    }
+  }
+}

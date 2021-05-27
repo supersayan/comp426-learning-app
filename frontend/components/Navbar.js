@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AuthButton from "../components/AuthButton";
 
 const Navbar = () => {
   return (
@@ -6,7 +7,7 @@ const Navbar = () => {
       <Link href="/">
         <a>
           <img
-            src="/strapi.png"
+            src="/banana.png"
             alt="home"
             className="logo"
             height="150"
@@ -14,10 +15,11 @@ const Navbar = () => {
           />
         </a>
       </Link>
-      <button className="snipcart-checkout flex items-center">
+      {/* <button className="snipcart-checkout flex items-center">
         <img src="/cart.svg" alt="Cart" />
         <span className="snipcart-total-price ml-3 font-semibold text-sm text-indigo-500"></span>
-      </button>
+      </button> */}
+      <AuthButton />
     </div>
   );
 };

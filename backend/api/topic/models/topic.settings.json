@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "topics",
+  "info": {
+    "name": "Topic",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "topic_title": {
+      "type": "string",
+      "required": true
+    },
+    "tid": {
+      "type": "uid"
+    },
+    "course": {
+      "via": "topics",
+      "model": "course"
+    },
+    "questions": {
+      "via": "topic",
+      "collection": "question"
+    }
+  }
+}

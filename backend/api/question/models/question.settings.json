@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "name": "Question",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "qid": {
+      "type": "uid",
+      "required": false
+    },
+    "question_text": {
+      "type": "richtext",
+      "required": false
+    },
+    "model_answer": {
+      "type": "richtext"
+    },
+    "points": {
+      "type": "decimal"
+    },
+    "topic": {
+      "via": "questions",
+      "model": "topic"
+    },
+    "author": {
+      "plugin": "users-permissions",
+      "model": "user"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "performances",
+  "info": {
+    "name": "Performance"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "performances"
+    },
+    "topic": {
+      "model": "topic"
+    },
+    "NumQuestionsAttempted": {
+      "type": "integer",
+      "default": 0
+    },
+    "NumQuestionsCorrect": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    }
+  }
+}

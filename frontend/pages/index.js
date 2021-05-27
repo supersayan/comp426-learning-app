@@ -1,21 +1,21 @@
 import Head from "next/head";
-import ProductsList from "../components/ProductsList";
-import { getProducts } from "../utils/api";
+import CoursesList from "../components/CoursesList";
+import { getCourses } from "../utils/api";
 
-const HomePage = ({ products }) => {
+const HomePage = ({ courses }) => {
   return (
     <div>
       <Head>
-        <title>Strapi Next.js E-commerce</title>
+        <title>question bank</title>
       </Head>
-      <ProductsList products={products} />
+      <CoursesList courses={courses} />
     </div>
   );
 };
 
 export async function getStaticProps() {
-  const products = await getProducts();
-  return { props: { products } };
+  const courses = await getCourses();
+  return { props: { courses } };
 }
 
 export default HomePage;

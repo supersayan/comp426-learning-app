@@ -1,12 +1,13 @@
 import App from "next/app";
 import Head from "next/head";
 import Layout from "../components/Layout";
-import { getCategories } from "../utils/api";
+import { getDepartments } from "../utils/api";
+import { Provider } from "next-auth/client";
 import "../styles/index.css";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <Layout categories={pageProps.categories}>
+    <Layout departments={pageProps.departments}>
       <Head>
         <link rel="preconnect" href="https://app.snipcart.com" />
         <link rel="preconnect" href="https://cdn.snipcart.com" />
@@ -16,7 +17,9 @@ const MyApp = ({ Component, pageProps }) => {
         />
         <script src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js" />
       </Head>
-      <Component {...pageProps} />
+      <Provider session={pageProps.session}>
+        <Component {...pageProps} />
+      </Provider>
     </Layout>
   );
 };
@@ -29,9 +32,9 @@ MyApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(ctx);
   // Fetch global site settings from Strapi
-  const categories = await getCategories();
+  const departments = await getDepartments();
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { categories, path: ctx.pathname } };
+  return { ...appProps, pageProps: { departments, path: ctx.pathname } };
 };
 
 export default MyApp;
