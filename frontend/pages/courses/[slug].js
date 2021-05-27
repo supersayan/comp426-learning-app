@@ -81,7 +81,7 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const courses = await getCourses();
-  if (courses)
+  if (Array.isArray(courses))
     return {
       paths: courses.map((_course) => {
         return {
