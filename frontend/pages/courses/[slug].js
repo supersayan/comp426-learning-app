@@ -80,13 +80,16 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const courses = await getCourses() ?? [];
-  return {
-    paths: courses.map((_course) => {
-      return {
-        params: { slug: _course.cid },
-      };
-    }),
+  const courses = await getCourses();
+  if (courses)
+    return {
+      paths: courses.map((_course) => {
+        return {
+          params: { slug: _course.cid },
+        };
+      }),
     fallback: true,
-  };
+    };
+  else
+    return { fallback: true };
 }
