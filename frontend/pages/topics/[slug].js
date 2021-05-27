@@ -1,12 +1,19 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { getTopics, getTopic, addQuestion } from "../../utils/api";
-import { useState } from 'react';
-import { useSession } from 'next-auth/client';
+import { useEffect, useState } from 'react';
+import { getSession, useSession } from 'next-auth/client';
 
-const TopicPage = ({ topic, error }) => {
+const TopicPage = ({ topic, error, session }) => {
   const [ _topic, setTopic ] = useState(topic);
-  const [ session ] = useSession();
+  const [ _session, refreshSession ] = useState(session);
+  // const [ session ] = useSession();
+  // const [ _session, dontSetSession ] = useState(session);
+
+  // const [session] = useSession();
+  useEffect( async () => {
+    refreshSession(await getSession());
+  });
 
   const router = useRouter();
   if (router.isFallback) {
@@ -63,7 +70,7 @@ const TopicPage = ({ topic, error }) => {
                         <td className="p-2 border-r">{_question.points}</td>
                       </tr>
                   ))}
-                  { (session) ? 
+                  { (_session) ? 
                   <tr className="bg-gray-50 text-center">
                     <td className="p-2 border-r">
                         {/* <input type="number" className="border p-1" onChange={this.handleChange.bind(this, 'qid')}/> */}
@@ -78,7 +85,7 @@ const TopicPage = ({ topic, error }) => {
                     <td className="p-2 border-r">
                         <input type="number" defaultValue="1" className="border p-1" id="points" name="points"/>
                     </td>
-                  </tr> : <div></div>}
+                  </tr> : <tr></tr>}
                 </tbody>
               </table>
             </form>
@@ -132,8 +139,10 @@ export default TopicPage;
 export async function getStaticProps(ctx) {
   const topic = await getTopic(ctx.params.slug);
   return {
-    props: { topic: topic,
-      error: (ctx.res && ctx.res.statusCode !== 200) ? ctx.res.statusCode + ': ' + ctx.res.statusMessage : null,}
+    props: {
+      topic: topic,
+      error: (ctx.res && ctx.res.statusCode !== 200) ? ctx.res.statusCode + ': ' + ctx.res.statusMessage : null,
+    }
   }
 }
 
