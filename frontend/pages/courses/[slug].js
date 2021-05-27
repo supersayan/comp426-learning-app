@@ -80,7 +80,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const courses = await getCourses();
+  const courses = await getCourses() ?? [];
   return {
     paths: courses.map((_course) => {
       return {
