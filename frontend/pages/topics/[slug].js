@@ -2,9 +2,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { getTopics, getTopic, addQuestion } from "../../utils/api";
 import { useState } from 'react';
+import { useSession } from 'next-auth/client';
 
 const TopicPage = ({ topic, error }) => {
   const [ _topic, setTopic ] = useState(topic);
+  const [ session ] = useSession();
 
   const router = useRouter();
   if (router.isFallback) {
@@ -61,21 +63,22 @@ const TopicPage = ({ topic, error }) => {
                         <td className="p-2 border-r">{_question.points}</td>
                       </tr>
                   ))}
+                  { (session) ? 
                   <tr className="bg-gray-50 text-center">
-                        <td className="p-2 border-r">
-                            {/* <input type="number" className="border p-1" onChange={this.handleChange.bind(this, 'qid')}/> */}
-                            <button className="btn border p-1 btn-blue" type="submit">+</button>
-                        </td>
-                        <td className="p-2 border-r">
-                            <input type="text" className="border p-1" id="question_text" name="question_text"/>
-                        </td>
-                        <td className="p-2 border-r">
-                            <input type="text" className="border p-1" id="model_answer" name="model_answer"/>
-                        </td>
-                        <td className="p-2 border-r">
-                            <input type="number" defaultValue="1" className="border p-1" id="points" name="points"/>
-                        </td>
-                  </tr>
+                    <td className="p-2 border-r">
+                        {/* <input type="number" className="border p-1" onChange={this.handleChange.bind(this, 'qid')}/> */}
+                        <button className="btn border p-1 btn-blue" type="submit">+</button>
+                    </td>
+                    <td className="p-2 border-r">
+                        <input type="text" className="border p-1" id="question_text" name="question_text"/>
+                    </td>
+                    <td className="p-2 border-r">
+                        <input type="text" className="border p-1" id="model_answer" name="model_answer"/>
+                    </td>
+                    <td className="p-2 border-r">
+                        <input type="number" defaultValue="1" className="border p-1" id="points" name="points"/>
+                    </td>
+                  </tr> : <div></div>}
                 </tbody>
               </table>
             </form>

@@ -28,12 +28,14 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const departments = await getDepartments();
-  return {
-    paths: departments.map((_department) => {
-      return {
-        params: { slug: _department.name },
-      };
-    }),
-    fallback: true,
-  };
+  if (departments)
+    return {
+      paths: departments.map((_department) => {
+        return {
+          params: { slug: _department.name },
+        };
+      }),
+      fallback: true,
+    };
+  else return {fallback: true};
 }
