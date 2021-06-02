@@ -1,3 +1,5 @@
 # Strapi application
 
-A quick description of your strapi application
+backend
+
+uses postgres database
